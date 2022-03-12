@@ -1,0 +1,27 @@
+{
+  "name": "back-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericf97/back-client.git"
+  },
+  "author": "Eric",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericf97/back-client/issues"
+  },
+  "homepage": "https://github.com/ericf97/back-client#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mssql": "^8.0.2",
+    "nodemon": "^2.0.15",
+    "swagger-ui-express": "^4.3.0",
+    "yamljs": "^0.3.0"
+  }
+}
