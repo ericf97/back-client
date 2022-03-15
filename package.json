@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ericf97/back-client#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "mssql": "^8.0.2",

@@ -47,3 +47,22 @@ paths:
       responses:
         '200':
           description: success saved
+  /login:
+    post:
+      summary: login app
+      description: login app
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nick:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: sucessfully loged
+        '403':
+          description: wrong username or password

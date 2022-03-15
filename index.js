@@ -5,7 +5,6 @@ const express = require('express');
 
 if(!process.env.DB_USER) {
   require('dotenv').config();
-  console.log(process.env);
 }
 
 const app = express();
