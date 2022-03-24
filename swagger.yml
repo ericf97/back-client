@@ -66,3 +66,34 @@ paths:
           description: sucessfully loged
         '403':
           description: wrong username or password
+  /form:
+    post:
+      summary: post client app
+      description: call this endpoint to save client info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+                enterprise:
+                  type: string
+                amountLost:
+                  type: number
+                moneyType:
+                  type: string
+                depositType:
+                  type: string
+                dateDeposit:
+                  type: string
+      responses:
+        '200':
+          description: succesfully saved
+        '403':
+          description: wrong params
