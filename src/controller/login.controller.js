@@ -6,9 +6,9 @@ loginController.create = async (req, res) => {
 
     const {nick, pass, email} = req.body;
 
-    //validate nick loin, pass security(special caracters), email was validated on router
+    //validate nick login, pass security(special caracters), email was validated on router
     await loginService.create(nick, pass, email);
-
+    res.status(200).send({ok: 'ok'});
   } catch (error) {
     console.error(error);
     res.status(400).send({data: `someting went wrong`})

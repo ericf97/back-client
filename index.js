@@ -15,6 +15,8 @@ app.listen(3000, () => {
   console.log(`app listening port 3000`)
 });
 
+app.use(express.json({limit: '50mb'}))
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerYml));
 
 app.use('/', router);

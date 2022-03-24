@@ -4,8 +4,9 @@ const loginController = require('../controller/login.controller');
 const validateRequest = require('../middleware/validate-request.middle');
 
 router
-  .post('/',
-    [body('nick').exists(),
+  .post('/', [
+    body('idUser').exists(),
+    body('nick').exists(),
     body('pass').exists(),
     body('email').isEmail(),
     validateRequest
