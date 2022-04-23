@@ -1,5 +1,5 @@
 const dbClient = require('../utils/dbClient');
-const {NVarChar} = require('mssql');
+const { NVarChar, Int } = require('mssql');
 const userDao = {};
 
 userDao.create = async (name, lastName, email, phone, address) => {
@@ -12,6 +12,25 @@ userDao.create = async (name, lastName, email, phone, address) => {
   request.input('address', NVarChar, address)
 
   const result = await request.query('insert into users output inserted.userId values(@name, @last_name, @email, @phone, @address)');
+
+  return result.recordset[0];
+}
+
+userDao.getAll = async() => {
+  const client = await dbClient();
+  const request = client.request();
+
+  const result = await request.query('select * from users')
+  return result.recordset;
+}
+
+userDao.getById = async(userId) => {
+  const client = await dbClient();
+  const request = client.request();
+
+  request.input('user_id', Int, userId);
+
+  const result = await request.query('select top(1) * from users where userId = @user_id')
 
   return result.recordset[0];
 }

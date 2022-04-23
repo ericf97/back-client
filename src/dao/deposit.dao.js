@@ -15,4 +15,15 @@ depositDao.save = async (caseId, amount, moneyType, depositType, dateDeposit) =>
   return request.query('insert into deposit values(@amount, @money_type, @deposit_type, @date_deposit, @case_id)');
 }
 
+depositDao.getAllByCaseId = async(caseId) => {
+  const client = await dbClient();
+  const request = client.request();
+
+  request.input('case_id', Int, caseId);
+
+  const result = await request.query('select * from deposit where caseId = @case_id');
+
+  return result.recordset;
+}
+
 module.exports = depositDao;

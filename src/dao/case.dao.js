@@ -15,4 +15,13 @@ caseDao.save = async (userId, nameEnterprise, amountLost) => {
   return result.recordset[0];
 }
 
+caseDao.getAllByUserId = async (userId) => {
+  const client = await dbClient();
+  const request = client.request();
+
+  request.input('user_id', Int, userId);
+  const result = await request.query('select * from cases where userId = @user_id');
+  return result.recordset;
+}
+
 module.exports = caseDao;

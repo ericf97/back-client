@@ -1,7 +1,9 @@
+const userController = require('../controller/user.controller');
+
 const router = require('express').Router();
 
-router.route('/user')
-    .get((req, res) => {
-        res.json({msg: 'westtt'})
-    })
+router
+    .get('/', userController.getAll)
+    .get('/:userId', userController.getById);
+
 module.exports = router;

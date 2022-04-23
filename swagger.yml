@@ -6,7 +6,7 @@ info:
   version: 0.0.1
 
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:3000/api
     description: Local server
 
 paths:
@@ -47,6 +47,32 @@ paths:
       responses:
         '200':
           description: success saved
+  /user:
+    get:
+      summary: get users
+      description: get all users
+      responses:
+        '200':
+          description: getting all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userId:
+                      type: number
+                    name:
+                      type: string
+                    lastName:
+                      type: string
+                    email:
+                      type: string
+                    phone:
+                      type: string
+                    address:
+                      type: string
   /login:
     post:
       summary: login app
