@@ -1,7 +1,7 @@
 const loginService = require('../services/login.service');
 const loginController = {};
 
-loginController.create = async (req, res) => {
+loginController.create = async (req, res, next) => {
   try {
 
     const {nick, pass} = req.body;
@@ -11,17 +11,19 @@ loginController.create = async (req, res) => {
     res.status(200).send({ok: 'ok'});
   } catch (error) {
     console.error(error);
-    res.status(400).send({...error})
+    next(error);
   }
 }
 
-loginController.login = async (req, res) => {
+loginController.login = async (req, res, next) => {
   try {
 
     const {nick, pass} = req.body;
     const result = await loginService.login(nick, pass);
+    res.json(result)
   } catch (error) {
-    
+    console.error(error);
+    next(error);
   }
 }
 

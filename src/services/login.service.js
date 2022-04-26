@@ -18,6 +18,19 @@ login.create = async (nick, pass, email) => {
 login.login = async(nick, pass ) => {
 
   const userExist = await loginDao.getByNick(nick);
+
+  if (userExist) {
+    // check user password with hashed password stored in the database
+    const validPassword = await bcrypt.compare(pass, userExist.pass);
+    if (validPassword) {
+      return { message: "Valid password" };
+    } else {
+      throw { error: "Invalid Password" };
+    }
+  } else {
+    throw { error: "User does not exist" };
+  }
+
 }
 
 module.exports = login;
