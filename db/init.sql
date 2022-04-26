@@ -26,3 +26,11 @@ create table deposit(
     caseId bigint not null,
     foreign key(caseId) references cases(caseId)
 )
+
+drop table if exists auth;
+create table auth(
+    authId bigint identity(1, 1) not null,
+    nick nvarchar(255) not null,
+    pass nvarchar(255) not null,
+    primary key(authId)
+)

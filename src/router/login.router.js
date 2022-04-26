@@ -4,13 +4,17 @@ const loginController = require('../controller/login.controller');
 const validateRequest = require('../middleware/validate-request.middle');
 
 router
-  .post('/', [
-    body('idUser').exists(),
-    body('nick').exists(),
-    body('pass').exists(),
-    body('email').isEmail(),
+  .post('/singup', [
+    body('nick').notEmpty(),
+    body('pass').notEmpty(),
     validateRequest
   ],
-    loginController.create);
+    loginController.create)
+  .post('/login', [
+    body('nick').notEmpty(),
+    body('pass').notEmpty(),
+    validateRequest
+  ],
+    loginController.login);
 
 module.exports = router;
