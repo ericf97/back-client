@@ -7,99 +7,122 @@
 	"item": [
 		{
 			"name": "login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nick\": \"eric\",\r\n    \"pass\": \"1234567\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nick\": \"eric\",\r\n    \"pass\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login",
+								"login"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{url}}/login/login",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"login",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "singup",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nick\": \"eric\",\r\n    \"pass\": \"1234567\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "singup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nick\": \"eric\",\r\n    \"pass\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login",
+								"login"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}/login/login",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"login",
-						"login"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "send form",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "user",
+			"item": [
+				{
+					"name": "Get users",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cases",
+			"item": [
+				{
+					"name": "send form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"eric marcelo fernandez\",\r\n    \"email\": \"fernadezeric1997@gmail.com\",\r\n    \"phone\": \"2613636885\",\r\n    \"enterprise\": \"123321\",\r\n    \"amountLost\": 60.3,\r\n    \"moneyType\": \"BNB\",\r\n    \"depositType\": \"binance\",\r\n    \"dateDeposit\": \"2021/03/31\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/case",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"case"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{url}}/form",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"form"
-					]
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get users",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "get user by id",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
+			]
 		}
 	]
 }

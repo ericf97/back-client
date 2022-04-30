@@ -24,4 +24,8 @@ formService.save = async (request) => {
   await depositDao.save(caseSaved.caseId, +amountLost, moneyType, depositType, dateDeposit);
 }
 
+formService.getAll = async() => {
+  return caseDao.getAll();
+}
+
 module.exports = formService;

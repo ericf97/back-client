@@ -25,4 +25,14 @@ caseDao.getAllByUserId = async (userId) => {
   return result.recordset;
 }
 
+caseDao.getAll = async() => {
+
+  const client = await dbClient();
+  const request = client.request();
+
+  const result = await request.query('select C.*, S.nameState from cases C join states S on S.stateId = C.stateId');
+
+  return result.recordset;
+}
+
 module.exports = caseDao;

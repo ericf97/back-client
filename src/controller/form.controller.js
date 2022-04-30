@@ -11,4 +11,12 @@ formController.new = async(req, res, next) => {
   }
 }
 
+formController.all = async(req, res, next) => {
+  try {
+    const result = await formService.getAll();
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+}
 module.exports = formController;

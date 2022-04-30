@@ -5,7 +5,7 @@ const formRouter = require('./form.router');
 const userRouter = require('./user.router');
 
 router.use('/login', loginRouter);
-router.use('/form', formRouter);
+router.use('/cases', formRouter);
 router.use('/user', userRouter);
 
 router.use(errorHandler);
