@@ -19,7 +19,7 @@ formService.save = async (request) => {
 
   const userSaved = await userDao.create(name, '', email, phone, address);
 
-  const caseSaved = await caseDao.save(userSaved.userId, enterprise, amountLost);
+  const caseSaved = await caseDao.save(userSaved.userId, enterprise, amountLost, 1); //1 means stateId initial
 
   await depositDao.save(caseSaved.caseId, +amountLost, moneyType, depositType, dateDeposit);
 }

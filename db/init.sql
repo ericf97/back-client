@@ -8,12 +8,21 @@ create table users(
     phone nvarchar(255)
 )
 
-drop table if exists cases
+drop table if exists states;
+create table states(
+    stateId bigint identity(1, 1) not null,
+    nameState nvarchar(100) not null,
+    primary key(stateId)
+)
+
+drop table if exists cases;
 create table cases(
     caseId bigint identity(1, 1) not null,
     nameEnterprise nvarchar(255) not null,
     amountLost nvarchar(255) not null,
-    primary key(caseId)
+    stateId bigint not null,
+    primary key(caseId),
+    foreign key(stateId) references states(stateId)
 )
 
 drop table if exists deposit;
