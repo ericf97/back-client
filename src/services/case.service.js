@@ -2,9 +2,9 @@ const caseDao = require('../dao/case.dao');
 const depositDao = require('../dao/deposit.dao');
 const userDao = require('../dao/user.dao');
 
-const formService = {};
+const caseService = {};
 
-formService.save = async (request) => {
+caseService.save = async (request) => {
 
   const {
     name,
@@ -24,8 +24,10 @@ formService.save = async (request) => {
   await depositDao.save(caseSaved.caseId, +amountLost, moneyType, depositType, dateDeposit);
 }
 
-formService.getAll = async() => {
+caseService.getAll = async() => {
   return caseDao.getAll();
 }
 
-module.exports = formService;
+caseService.getById = caseDao.getById;
+
+module.exports = caseService;

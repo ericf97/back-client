@@ -21,7 +21,9 @@ let connection = null;
 
 const connect = async () => {
   if(connection) return connection;
-  return connection = await sql.connect('Server=localhost,1433;Database=clienti;User Id=sa;Password=123456;Encrypt=false');
+  console.log('connecting');
+  console.log(process.env.CONNECTION_STRING);
+  return connection = await sql.connect(process.env.CONNECTION_STRING);
 }
 
 module.exports = connect;

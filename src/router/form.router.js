@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const validateRequest = require('../middleware/validate-request.middle');
 const { body } = require('express-validator');
-const formController = require('../controller/form.controller');
+const caseController = require('../controller/case.controller');
 
 router
   .post('/', [
@@ -14,8 +14,9 @@ router
     body('depositType').notEmpty(),
     body('dateDeposit').notEmpty().isDate(),
     validateRequest],
-    formController.new
+    caseController.new
   )
-  .get('/', formController.all);
+  .get('/', caseController.all)
+  .get('/:caseId', caseController.getById)
 
 module.exports = router;
