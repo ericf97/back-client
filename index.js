@@ -3,7 +3,7 @@ const YAML = require('yamljs');
 const swaggerYml = YAML.load('./swagger.yml');
 const express = require('express');
 
-if(!process.env.DB_USER) {
+if(!process.env.PORT) {
   require('dotenv').config();
 }
 
