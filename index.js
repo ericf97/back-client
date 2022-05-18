@@ -11,8 +11,8 @@ const app = express();
 
 const router = require('./router');
 
-app.listen(3000, () => {
-  console.log(`app listening port 3000`)
+app.listen(process.env.PORT, () => {
+  console.log(`app listening port ${process.env.PORT}`)
 });
 
 app.use(express.json({limit: '50mb'}))
