@@ -92,8 +92,10 @@ paths:
           description: sucessfully loged
         '403':
           description: wrong username or password
-  /form:
+  /cases:
     post:
+      tags:
+        - cases
       summary: post client app
       description: call this endpoint to save client info
       requestBody:
@@ -123,3 +125,10 @@ paths:
           description: succesfully saved
         '403':
           description: wrong params
+    get:
+      tags:
+        - cases
+      description: get all 
+      responses:
+        '200':
+          description: all cases
