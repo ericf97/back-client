@@ -11,7 +11,7 @@ caseDao.save = async (userId, nameEnterprise, amountLost, stateId) => {
   request.input('amount_lost', Decimal, amountLost);
   request.input('state_id', Int, stateId);
 
-  const result = await request.query('insert into cases output inserted.caseId values(@user_id, @name_enterprise, @amount_lost, @state_id)');
+  const result = await request.query('insert into cases output inserted.caseId values(@name_enterprise, @amount_lost, @state_id, @user_id)');
 
   return result.recordset[0];
 }

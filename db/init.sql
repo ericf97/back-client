@@ -1,12 +1,13 @@
-Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
 
+drop table if exists users;
 create table users(
     userId bigint identity(1, 1) not null,
     name nvarchar(255),
     lastName nvarchar (255),
     email nvarchar(255),
     phone nvarchar(255),
-    addressUser nvarchar(500)
+    addressUser nvarchar(500),
+    primary key(userId)
 )
 
 drop table if exists states;
@@ -22,8 +23,10 @@ create table cases(
     nameEnterprise nvarchar(255) not null,
     amountLost nvarchar(255) not null,
     stateId bigint not null,
+    userId bigint not null,
     primary key(caseId),
-    foreign key(stateId) references states(stateId)
+    foreign key(stateId) references states(stateId),
+    foreign key(userId) references users(userId)
 )
 
 drop table if exists deposit;
