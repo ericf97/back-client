@@ -29,12 +29,12 @@ azFileService.createFileSpace = (fileName, fileLength, directoryName) => {
 }
 
 azFileService.uploadFile = (fileName, fileLength, directoryName, fileData) => {
-  return axios.put(`${AZURE_STORAGE_URL}${directoryName}/${fileName}?${SAS_KEY}`, {data: Buffer.from(fileData)},
+  return axios.put(`${AZURE_STORAGE_URL}${directoryName}/${fileName}?comp=range&${SAS_KEY}`, fileData,
   {
     headers: {
-      ...headers,
+      // ...headers,
       'x-ms-write': 'update',
-      'x-ms-range': `bytes=0-${fileLength}`
+      'x-ms-range': `bytes=0-${fileLength-1}`
     }
   });
 }

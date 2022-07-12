@@ -8,6 +8,6 @@ router
     .post('/', [
         body('idUser'),
         validateRequest
-    ], fileController.save)
+    ], fileController.save);
 
 module.exports = router;
