@@ -30,7 +30,11 @@ caseDao.getAll = async() => {
   const client = await dbClient();
   const request = client.request();
 
-  const result = await request.query('select C.*, S.nameState from cases C join states S on S.stateId = C.stateId');
+  const result = await request.query(
+   `select C.*, S.nameState, U.*
+    from cases C
+    join states S on S.stateId = C.stateId
+    join users U on C.userId = U.userId`);
 
   return result.recordset;
 }
