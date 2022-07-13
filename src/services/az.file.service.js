@@ -12,6 +12,11 @@ azFileService.readDirectory = async () => {
   const directory = await axios.get(`${AZURE_STORAGE_URL}?restype=directory&comp=list&${SAS_KEY}`);
   return parseToJSON(directory.data);
 }
+azFileService.readDirectory = async (caseId) => {
+
+  const directory = await axios.get(`${AZURE_STORAGE_URL}${caseId}?restype=directory&comp=list&${SAS_KEY}`);
+  return parseToJSON(directory.data);
+}
 
 azFileService.createDirectory = (directoryName) => {
   return axios.put(`${AZURE_STORAGE_URL}${directoryName}?restype=directory&${SAS_KEY}`, undefined,{headers});

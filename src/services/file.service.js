@@ -5,7 +5,7 @@ const fileService = {};
 
 fileService.save = async(body) => {
 
-  const {caseId, fileName, fileLength, fileData} = body;
+  const {caseId, fileName, fileData} = body;
 
   const directory = await azFileService.readDirectory();
 
@@ -32,6 +32,12 @@ fileService.save = async(body) => {
 
   // upload the file
   await azFileService.uploadFile(fileName, file.length, caseId, file);
+}
+
+fileService.get = async(caseId) => {
+
+  const files =  await azFileService.readDirectory(caseId);
+  return files.EnumerationResults.Entries[0].File;
 }
 
 module.exports = fileService;
