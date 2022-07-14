@@ -14,5 +14,17 @@ fileController.save = async(req, res, next) => {
   }
 }
 
+fileController.get = async(req, res, next) => {
+
+  try {
+    const {caseId} = req.params;
+
+    const directories = await fileService.get(caseId);
+    res.json(directories);
+  } catch (error) {
+    console.log(error);
+    throw { error: "something went wrong uploading this file" };
+  }
+}
 
 module.exports = fileController;

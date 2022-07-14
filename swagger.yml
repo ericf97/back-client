@@ -133,3 +133,30 @@ paths:
       responses:
         '200':
           description: all cases
+  /file:
+    post:
+      tags:
+        - file
+      summary: post to save file
+      description: save file that belongs to a case
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                caseId:
+                  type: number
+                fileName:
+                  type: string
+                fileData:
+                  type: string
+  /file/{caseId}:
+    get:
+      tags:
+        - file
+      summary: get files from case Id
+      description: get all files saved on one caseId
+      responses:
+        '200':
+          description: all files

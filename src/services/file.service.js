@@ -5,7 +5,7 @@ const fileService = {};
 
 fileService.save = async(body) => {
 
-  const {caseId, fileName, fileLength, fileData} = body;
+  const {caseId, fileName, fileData} = body;
 
   const directory = await azFileService.readDirectory();
 
@@ -25,11 +25,19 @@ fileService.save = async(body) => {
     await azFileService.createDirectory(caseId);
   }
 
+  const file = Buffer.from(fileData, 'base64');
   // set space for file
-  await azFileService.createFileSpace(fileName, fileLength, caseId);
+  await azFileService.createFileSpace(fileName, file.length, caseId);
+  console.log('space created');
 
   // upload the file
-  await azFileService.uploadFile(fileName, fileLength, caseId, fileData)
+  await azFileService.uploadFile(fileName, file.length, caseId, file);
+}
+
+fileService.get = async(caseId) => {
+
+  const files =  await azFileService.readDirectory(caseId);
+  return files.EnumerationResults.Entries[0].File;
 }
 
 module.exports = fileService;
