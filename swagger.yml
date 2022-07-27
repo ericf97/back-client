@@ -8,7 +8,7 @@ info:
 servers:
   - url: http://localhost:3000/api
     description: Local server
-  - url: https://backend-moneyback.azurewebsites.net/api
+  - url: https://dev-moneyback.azurewebsites.net/api
     description: dev server
 paths:
   /user/{id}:
