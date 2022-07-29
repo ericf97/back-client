@@ -157,6 +157,12 @@ paths:
         - file
       summary: get files from case Id
       description: get all files saved on one caseId
+      parameters:
+        - in: path
+          name: caseId
+          schema:
+            type: integer
+          required: true
       responses:
         '200':
           description: all files
