@@ -7,7 +7,7 @@ fileService.save = async(body) => {
 
   const {caseId, fileName, fileData} = body;
 
-  const directory = await azFileService.readDirectory();
+  const directory = await azFileService.readDirectoryBase();
 
   const cases = directory.EnumerationResults.Entries[0].Directory;
 

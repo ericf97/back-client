@@ -7,7 +7,7 @@ const headers = {
   'x-ms-version': '2021-06-08'
 }
 
-azFileService.readDirectory = async () => {
+azFileService.readDirectoryBase = async () => {
 
   const directory = await axios.get(`${AZURE_STORAGE_URL}?restype=directory&comp=list&${SAS_KEY}`);
   return parseToJSON(directory.data);
