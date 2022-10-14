@@ -8,7 +8,7 @@ router
     body('name').notEmpty(),
     body('email').exists().isEmail(),
     body('phone').notEmpty(),
-    body('enterprise').notEmpty(),
+    body('nameEnterprise').notEmpty(),
     body('amountLost').notEmpty(),
     body('moneyType').notEmpty(),
     body('depositType').notEmpty(),
@@ -16,7 +16,16 @@ router
     validateRequest],
     caseController.new
   )
+  .patch('/', [
+    body('caseId').notEmpty(),
+    body('nameEnterprise').notEmpty(),
+    body('amountLost').notEmpty(),
+    body('stateId').notEmpty().isNumeric(),
+    validateRequest],
+    caseController.edit
+  )
   .get('/', caseController.all)
-  .get('/:caseId', caseController.getById)
+  .get('/:caseId(\\d+)/', caseController.getById)
+  .get('/states', caseController.states);
 
 module.exports = router;

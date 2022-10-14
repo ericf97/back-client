@@ -53,6 +53,30 @@ caseDao.getById = async(caseId) => {
   where C.caseId = @case_id
   `);
 
+  return result.recordset[0];
+}
+
+caseDao.edit = async (caseId, nameEnterprise, amountLost, stateId) => {
+  const client = await dbClient();
+  const request = client.request();
+  
+  request.input('case_id', Int, caseId);
+  request.input('name_enterprise', NVarChar, nameEnterprise);
+  request.input('amount_lost', Decimal, amountLost);
+  request.input('state_id', Int, stateId);
+
+  return request.query(`update cases
+  set nameEnterprise = @name_enterprise
+  amountLost = @amount_lost
+  stateId = @state_id
+  where caseId = @case_id`);
+}
+
+caseDao.getStates = async() => {
+  const client = await dbClient();
+  const request = client.request();
+  const result = await request.query('select * from states');
+
   return result.recordset;
 }
 

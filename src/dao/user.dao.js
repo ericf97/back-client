@@ -35,4 +35,26 @@ userDao.getById = async(userId) => {
   return result.recordset[0];
 }
 
+userDao.save = async(userId, name, lastName, email, phone, addressUser) => {
+  const client = await dbClient();
+  const request = client.request();
+
+  request.input('user_id', Int, userId);
+  request.input('name', NVarChar, name);
+  request.input('last_name', NVarChar, lastName);
+  request.input('email', NVarChar, email);
+  request.input('phone', NVarChar, phone);
+  request.input('address_user', NVarChar, addressUser);
+
+  return request.query(`
+    update users set
+    name = @name
+    lastName = @last_name
+    email = @email
+    phone = @phone
+    addressUser = @address_user
+    where userId = @user_id
+  `);
+}
+
 module.exports = userDao;

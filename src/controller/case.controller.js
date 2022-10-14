@@ -29,4 +29,25 @@ caseController.getById = async(req, res, next) => {
     next(error)
   }
 }
+
+caseController.edit = async(req, res, next) => {
+  try {
+
+    await caseService.edit(req.body);
+    res.sendStatus(200);
+  } catch (error) {
+    next(error);
+  }
+}
+
+caseController.states = async (req, res, next) => {
+
+  try {
+    const result = await caseService.getStates();
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = caseController;

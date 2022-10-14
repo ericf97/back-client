@@ -111,7 +111,7 @@ paths:
                   type: string
                 phone:
                   type: string
-                enterprise:
+                nameEnterprise:
                   type: string
                 amountLost:
                   type: number
@@ -133,6 +133,37 @@ paths:
       responses:
         '200':
           description: all cases
+    patch:
+      tags:
+        - cases
+      description: edit the current case
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                caseId:
+                  type: number
+                nameEnterprise:
+                  type: string
+                amountLost:
+                  type: number
+                stateId:
+                  type: string
+      responses:
+        '404':
+          description: case does not exist
+        '200':
+          description: succefully updated
+  /cases/states:
+    get:
+      tags:
+        - cases
+      description: get all states
+      responses:
+        '200':
+          description: get all states
   /file:
     post:
       tags:
