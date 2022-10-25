@@ -32,9 +32,8 @@ caseController.getById = async(req, res, next) => {
 
 caseController.edit = async(req, res, next) => {
   try {
-
     await caseService.edit(req.body);
-    res.sendStatus(200);
+    res.json(200);
   } catch (error) {
     next(error);
   }

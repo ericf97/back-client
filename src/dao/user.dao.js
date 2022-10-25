@@ -48,13 +48,14 @@ userDao.save = async(userId, name, lastName, email, phone, addressUser) => {
 
   return request.query(`
     update users set
-    name = @name
-    lastName = @last_name
-    email = @email
-    phone = @phone
+    name = @name,
+    lastName = @last_name,
+    email = @email,
+    phone = @phone,
     addressUser = @address_user
     where userId = @user_id
   `);
 }
+
 
 module.exports = userDao;
