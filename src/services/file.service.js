@@ -37,7 +37,15 @@ fileService.save = async(body) => {
 fileService.get = async(caseId) => {
 
   const files =  await azFileService.readDirectory(caseId);
-  return files.EnumerationResults.Entries[0].File;
+  return files.EnumerationResults.Entries[0].File.map(a => {
+
+    return {
+      caseId: caseId,
+      fileName: a.Name[0],
+      url: `url/${a.Name}`,
+      ext: a.Name[0].split('.')[1]
+    }
+  });
 }
 
 module.exports = fileService;
