@@ -29,7 +29,7 @@ caseService.getAll = async() => {
 }
 
 caseService.edit = async (request) => {
-  const {
+  let {
     caseId,
     userId,
     name,
