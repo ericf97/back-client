@@ -7,7 +7,7 @@ fileController.save = async(req, res, next) => {
 
     await fileService.save(req.body);
 
-    res.sendStatus(200);
+    res.send({});
   } catch (error) {
     console.error(error);
     throw { error: "something went wrong uploading this file" };
@@ -33,7 +33,7 @@ fileController.deleteFile = async(req, res, next) => {
     const {caseId, fileName} = req.params;
 
     const response = await fileService.deleteFile(caseId, fileName);
-    res.status(response);
+    res.json(response.status);
   } catch (error) {
     console.log(error);
     throw { error: "something went wrong getting this file" };
