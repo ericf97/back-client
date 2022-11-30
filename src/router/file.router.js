@@ -12,6 +12,11 @@ router
     .get('/:caseId', [
         param('caseId'),
         validateRequest
-    ], fileController.get);
+    ], fileController.get)
+    .delete('/:caseId/:fileName', [
+        param('caseId'),
+        param('fileName'),
+        validateRequest
+    ], fileController.deleteFile);
 
 module.exports = router;

@@ -33,6 +33,17 @@ azFileService.createFileSpace = (fileName, fileLength, directoryName) => {
   });
 }
 
+azFileService.deleteFile = (caseId, fileName) => {
+  const url = `${AZURE_STORAGE_URL}${caseId}/${fileName}?${SAS_KEY}`;
+  console.log(url);
+  return axios.delete(url,
+  {
+    headers: {
+      ...headers
+    }
+  });
+}
+
 azFileService.uploadFile = (fileName, fileLength, directoryName, fileData) => {
   return axios.put(`${AZURE_STORAGE_URL}${directoryName}/${fileName}?comp=range&${SAS_KEY}`, fileData,
   {

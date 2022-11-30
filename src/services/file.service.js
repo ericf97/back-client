@@ -3,6 +3,7 @@ const utf8 = require('utf8');
 
 const fileService = {};
 
+
 fileService.save = async(body) => {
 
   const {caseId, fileName, fileData} = body;
@@ -46,6 +47,10 @@ fileService.get = async(caseId) => {
       ext: a.Name[0].split('.')[1]
     }
   });
+}
+
+fileService.deleteFile = (caseId, fileName) => {
+  return azFileService.deleteFile(caseId, fileName);
 }
 
 module.exports = fileService;

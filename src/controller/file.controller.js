@@ -27,4 +27,16 @@ fileController.get = async(req, res, next) => {
   }
 }
 
+fileController.deleteFile = async(req, res, next) => {
+
+  try {
+    const {caseId, fileName} = req.params;
+
+    const response = await fileService.deleteFile(caseId, fileName);
+    res.status(response);
+  } catch (error) {
+    console.log(error);
+    throw { error: "something went wrong getting this file" };
+  }
+}
 module.exports = fileController;
