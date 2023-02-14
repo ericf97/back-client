@@ -4,15 +4,18 @@ const userDao = require('../dao/user.dao');
 
 const login = {};
 
-login.create = async (nick, pass, email) => {
+login.create = async (nick, pass, userId) => {
 
-  const userExist = await loginDao.getByNick(nick);
+  const nickExists = await loginDao.getByNick(nick);
+  const userExists = await userDao.getById(userId);
 
-  if(userExist) throw { error: 'user nick already exists' }
+  if(nickExists) throw { error: 'user nick already exists' }
+  if(!userExists) throw { error: 'user not exists' }
 
   const salt = await bcrypt.genSalt(10);
   const passcrypt = await bcrypt.hash(pass, salt);
-  return loginDao.create(nick, passcrypt, email);
+  const auth = await loginDao.create(nick, passcrypt);
+  return userDao.updateAuth(userId, auth.authId)
 }
 
 login.login = async(nick, pass ) => {

@@ -11,7 +11,7 @@ userDao.create = async (name, lastName, email, phone, address) => {
   request.input('phone', NVarChar, phone);
   request.input('address', NVarChar, address)
 
-  const result = await request.query('insert into users output inserted.userId values(@name, @last_name, @email, @phone, @address)');
+  const result = await request.query('insert into users(name, lastName, email, phone, addressUser) output inserted.userId values(@name, @last_name, @email, @phone, @address)');
 
   return result.recordset[0];
 }
@@ -57,5 +57,14 @@ userDao.save = async(userId, name, lastName, email, phone, addressUser) => {
   `);
 }
 
+userDao.updateAuth = async(userId, authId) => {
+  const client = await dbClient();
+  const request = client.request();
+
+  request.input('user_id', Int, userId);
+  request.input('auth_id', Int, authId);
+
+  return request.query('update users set authId = @auth_id where userId = @user_Id');
+}
 
 module.exports = userDao;

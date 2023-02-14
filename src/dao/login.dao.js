@@ -9,7 +9,7 @@ loginDao.create = async (nick, pass) => {
   request.input('nick', NVarChar, nick);
   request.input('pass', NVarChar, pass);
 
-  return request.query('insert into auth values(@nick, @pass)');
+  return request.query('insert into auth output inserted.authId values(@nick, @pass)');
 }
 
 loginDao.getByNick = async (nick) => {

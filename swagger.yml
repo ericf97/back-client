@@ -76,6 +76,8 @@ paths:
                       type: string
   /login:
     post:
+      tags:
+        - login
       summary: login app
       description: login app
       requestBody:
@@ -197,3 +199,26 @@ paths:
       responses:
         '200':
           description: all files
+  /login/singup:
+    post:
+      tags:
+        - login
+      summary: create a new login
+      description: create a new login with username and password updating user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nick:
+                  type: string
+                pass:
+                  type: string
+                userId:
+                  type: number
+      responses:
+        '200':
+          description: login created
+        '400':
+          description: user not exists | user nick already exists

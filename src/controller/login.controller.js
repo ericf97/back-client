@@ -4,10 +4,10 @@ const loginController = {};
 loginController.create = async (req, res, next) => {
   try {
 
-    const {nick, pass} = req.body;
+    const {nick, pass, userId} = req.body;
 
     //validate nick login, pass security(special caracters), email was validated on router
-    await loginService.create(nick, pass);
+    await loginService.create(nick, pass, userId);
     res.status(200).send({ok: 'ok'});
   } catch (error) {
     console.error(error);

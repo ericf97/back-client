@@ -7,6 +7,7 @@ router
   .post('/singup', [
     body('nick').notEmpty(),
     body('pass').notEmpty(),
+    body('userId').notEmpty().isNumeric(),
     validateRequest
   ],
     loginController.create)
