@@ -12,19 +12,18 @@ const app = express();
 
 const router = require('./router');
 
-const corsOptions ={
+const corsOptions = {
   origin: '*', 
   credentials: true,
   optionSuccessStatus: 200,
-}
-
+} 
 app.use(cors(corsOptions));
 
 app.listen(process.env.PORT, () => {
-  console.log(`app listening port ${process.env.PORT}`)
+  console.log(`app listening port ${process.env.PORT}`);
 });
 
-app.use(express.json({limit: '50mb'}))
+app.use(express.json({limit: '50mb'}));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerYml));
 

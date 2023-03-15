@@ -50,3 +50,8 @@ create table cases(
     foreign key(userId) references users(userId)
 )
 
+create table roles(
+    roleId bigint identity(1,1),
+    name nvarchar(20) not null,
+    primary key(roleId)
+)

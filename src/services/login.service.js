@@ -27,7 +27,7 @@ login.login = async(nick, pass ) => {
     // check user password with hashed password stored in the database
     const validPassword = await bcrypt.compare(pass, userExist.pass);
     if (validPassword) {
-      return { message: "Valid password" };
+      return { message: "Valid password", user: userExist};
     } else {
       throw { error: "Invalid Password" };
     }

@@ -11,7 +11,7 @@ router
     validateRequest
   ],
     loginController.create)
-  .post('/login', [
+  .post('/', [
     body('nick').notEmpty(),
     body('pass').notEmpty(),
     validateRequest
