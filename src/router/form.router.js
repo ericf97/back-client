@@ -6,8 +6,10 @@ const caseController = require('../controller/case.controller');
 router
   .post('/', [
     body('name').notEmpty(),
+    body('lastName').notEmpty(),
     body('email').exists().isEmail(),
-    body('phone').notEmpty(),
+    body('phone'),
+    body('addressUser'),
     body('nameEnterprise').notEmpty(),
     body('amountLost').notEmpty(),
     body('moneyType').notEmpty(),
