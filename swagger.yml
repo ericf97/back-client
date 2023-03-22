@@ -222,3 +222,23 @@ paths:
           description: login created
         '400':
           description: user not exists | user nick already exists
+  /email:
+    post:
+      tags:
+        - email
+      summary: send welcome email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emailTo:
+                  type: string
+                user:
+                  type: string
+                pass:
+                  type: string
+      responses:
+        '200':
+          description: email sent
