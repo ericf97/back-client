@@ -15,7 +15,8 @@ login.create = async (nick, pass, userId) => {
   const salt = await bcrypt.genSalt(10);
   const passcrypt = await bcrypt.hash(pass, salt);
   const auth = await loginDao.create(nick, passcrypt);
-  return userDao.updateAuth(userId, auth.authId)
+  console.log(auth);
+  return userDao.updateAuth(userId, auth.recordset[0].authId)
 }
 
 login.login = async(nick, pass ) => {
@@ -26,7 +27,7 @@ login.login = async(nick, pass ) => {
     // check user password with hashed password stored in the database
     const validPassword = await bcrypt.compare(pass, userExist.pass);
     if (validPassword) {
-      return { message: "Valid password" };
+      return { message: "Valid password", user: userExist};
     } else {
       throw { error: "Invalid Password" };
     }

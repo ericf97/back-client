@@ -67,4 +67,14 @@ userDao.updateAuth = async(userId, authId) => {
   return request.query('update users set authId = @auth_id where userId = @user_Id');
 }
 
+userDao.getByEmail = async(email) => {
+  const client = await dbClient();
+  const request = client.request();
+
+  request.input('email', NVarChar, email);
+
+  const result = await request.query('select * from users where email = @email');
+
+  return result.recordset[0];
+}
 module.exports = userDao;

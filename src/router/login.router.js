@@ -4,14 +4,14 @@ const loginController = require('../controller/login.controller');
 const validateRequest = require('../middleware/validate-request.middle');
 
 router
-  .post('/singup', [
+  .post('/signup', [
     body('nick').notEmpty(),
     body('pass').notEmpty(),
     body('userId').notEmpty().isNumeric(),
     validateRequest
   ],
     loginController.create)
-  .post('/login', [
+  .post('/', [
     body('nick').notEmpty(),
     body('pass').notEmpty(),
     validateRequest

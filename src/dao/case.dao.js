@@ -31,7 +31,7 @@ caseDao.getAll = async() => {
   const request = client.request();
 
   const result = await request.query(
-   `select C.*, S.nameState, U.name, U.lastName, U.phone, U.email, U.addressUser, D.amount, D.moneyType, D.methodType, D.dateDeposit
+   `select C.*, S.nameState, U.name, U.lastName, U.phone, U.email, U.addressUser, D.amount, D.moneyType, D.methodType, D.dateDeposit, U.authId
     from cases C
     join states S on S.stateId = C.stateId
     join users U on C.userId = U.userId
@@ -57,7 +57,7 @@ caseDao.getById = async(caseId) => {
   return result.recordset[0];
 }
 
-caseDao.edit = async (caseId, nameEnterprise, amountLost, stateId) => {
+caseDao.edit = async (caseId, nameEnterprise, amountLost, stateId, country) => {
   const client = await dbClient();
   const request = client.request();
   
@@ -65,11 +65,13 @@ caseDao.edit = async (caseId, nameEnterprise, amountLost, stateId) => {
   request.input('name_enterprise', NVarChar, nameEnterprise);
   request.input('amount_lost', Decimal, amountLost);
   request.input('state_id', Int, stateId);
+  request.input('country', NVarChar, country);
 
   return request.query(`update cases
   set nameEnterprise = @name_enterprise,
   amountLost = @amount_lost,
-  stateId = @state_id
+  stateId = @state_id,
+  country = @country
   where caseId = @case_id`);
 }
 

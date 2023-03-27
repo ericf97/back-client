@@ -88,7 +88,7 @@ paths:
               properties:
                 nick:
                   type: string
-                password:
+                pass:
                   type: string
       responses:
         '200':
@@ -109,6 +109,8 @@ paths:
               properties:
                 name:
                   type: string
+                lastName:
+                  type: string
                 email:
                   type: string
                 phone:
@@ -122,6 +124,8 @@ paths:
                 depositType:
                   type: string
                 dateDeposit:
+                  type: string
+                country:
                   type: string
       responses:
         '200':
@@ -153,6 +157,8 @@ paths:
                   type: number
                 stateId:
                   type: string
+                country:
+                  type: string
       responses:
         '404':
           description: case does not exist
@@ -166,6 +172,22 @@ paths:
       responses:
         '200':
           description: get all states
+  /cases/user/{userId}:
+    get:
+      tags:
+        - cases
+      description: get all cases that belongs to a user
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: all cases succefully getted
+        '400':
+          description: user do not exists
   /file:
     post:
       tags:
@@ -199,7 +221,7 @@ paths:
       responses:
         '200':
           description: all files
-  /login/singup:
+  /login/signup:
     post:
       tags:
         - login
@@ -222,3 +244,23 @@ paths:
           description: login created
         '400':
           description: user not exists | user nick already exists
+  /email:
+    post:
+      tags:
+        - email
+      summary: send welcome email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emailTo:
+                  type: string
+                user:
+                  type: string
+                pass:
+                  type: string
+      responses:
+        '200':
+          description: email sent

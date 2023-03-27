@@ -45,8 +45,14 @@ create table cases(
     amountLost nvarchar(255) not null,
     stateId bigint not null,
     userId bigint not null,
+    country nvarchar(50),
     primary key(caseId),
     foreign key(stateId) references states(stateId),
     foreign key(userId) references users(userId)
 )
 
+create table roles(
+    roleId bigint identity(1,1),
+    name nvarchar(20) not null,
+    primary key(roleId)
+)

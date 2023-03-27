@@ -36,7 +36,7 @@
 					"response": []
 				},
 				{
-					"name": "singup",
+					"name": "signup",
 					"request": {
 						"method": "POST",
 						"header": [],

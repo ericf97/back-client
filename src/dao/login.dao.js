@@ -9,7 +9,8 @@ loginDao.create = async (nick, pass) => {
   request.input('nick', NVarChar, nick);
   request.input('pass', NVarChar, pass);
 
-  return request.query('insert into auth output inserted.authId values(@nick, @pass)');
+  //role id 2 = normal user
+  return request.query('insert into auth output inserted.authId values(@nick, @pass, 2)');
 }
 
 loginDao.getByNick = async (nick) => {
@@ -18,7 +19,7 @@ loginDao.getByNick = async (nick) => {
 
   request.input('nick', NVarChar, nick);
 
-  const result = await request.query('select * from auth where nick = @nick');
+  const result = await request.query('select a.*, r.name as roleName from auth a join roles r on r.roleId = a.roleId where a.nick = @nick');
 
   return result.recordset[0];
 }

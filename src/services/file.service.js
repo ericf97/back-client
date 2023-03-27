@@ -3,7 +3,6 @@ const utf8 = require('utf8');
 
 const fileService = {};
 
-
 fileService.save = async(body) => {
 
   const {caseId, fileName, fileData} = body;
