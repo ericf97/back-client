@@ -15,6 +15,7 @@ router
     body('moneyType').notEmpty(),
     body('depositType').notEmpty(),
     body('dateDeposit').notEmpty().isDate(),
+    body('country').notEmpty(),
     validateRequest],
     caseController.new
   )
@@ -23,11 +24,12 @@ router
     body('nameEnterprise').notEmpty(),
     body('amountLost').notEmpty(),
     body('stateId').notEmpty().isNumeric(),
+    body('country').notEmpty(),
     validateRequest],
     caseController.edit
   )
   .get('/', caseController.all)
   .get('/:caseId(\\d+)/', caseController.getById)
-  .get('/states', caseController.states);
-
+  .get('/states', caseController.states)
+  .get('/user/:userId(\\d+)/', caseController.getByUserId);
 module.exports = router;
