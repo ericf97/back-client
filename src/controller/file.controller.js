@@ -1,11 +1,11 @@
 const fileController = {};
-const fileService = require('../services/file.service');
+const scanFunction = require('../services/scan.service');
 
 fileController.save = async(req, res, next) => {
 
   try {
-
-    await fileService.save(req.body);
+    
+    await scanFunction(req.body);
 
     res.send({});
   } catch (error) {
