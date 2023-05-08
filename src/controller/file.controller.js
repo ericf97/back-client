@@ -8,17 +8,18 @@ fileController.save = async(req, res, next) => {
     //true si scan retorna ok, false si es malicioso seguin implementacion
     scanFunction(req.body)
       .then((result) => {
-
+        
         if(result){
           fileService.save(req.body).catch((error) => {
             //error al subir, then..
+            console.log("error al subir el archivo")
           });
         }
         //scan es malo, then..
       })
       .catch((error) => {
         //error al escanear, then..
-
+        console.log("error al escanear archivo")
       });
     
     

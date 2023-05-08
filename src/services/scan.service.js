@@ -82,6 +82,7 @@ scanFunction = async(body)=> {
             (analysis_response_parsed.data.attributes.stats.undetected + 
               analysis_response_parsed.data.attributes.stats.harmless)<40
             ){
+            console.log("archivo malicioso o analisis incompleto")
             resolve(false)
           }
           resolve(true)
