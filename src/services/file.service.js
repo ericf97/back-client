@@ -1,5 +1,6 @@
 const azFileService = require("./az.file.service");
 const utf8 = require('utf8');
+const fs = require('fs');
 
 const fileService = {};
 
@@ -26,6 +27,13 @@ fileService.save = async(body) => {
   }
 
   const file = Buffer.from(fileData, 'base64');
+  
+  //
+  const tempFilePath = './fileToScan.dat';
+  fs.writeFileSync(tempFilePath, file);
+
+
+
   // set space for file
   await azFileService.createFileSpace(fileName, file.length, caseId);
   console.log('space created');
