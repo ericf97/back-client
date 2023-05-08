@@ -2,7 +2,7 @@ const fs = require('fs');
 const fileService = require('./file.service');
 const NodeClam = require('clamscan');
 const { Readable } = require('stream');
-const nvt = require('node-virustotal');
+const getVtInstance = require('./nvt.singleton')
 const {VIRUS_TOTAL_API_KEY} = process.env;
 
 
@@ -58,7 +58,8 @@ scanFunction = async(body)=> {
 
     const apikey = String(VIRUS_TOTAL_API_KEY);
 
-    const defaultTimedInstance = nvt.makeAPI(60000);
+    //makeAPI recibe tiempo en ms que espera a ejecutar el analisis.
+    const defaultTimedInstance = getVtInstance()
     defaultTimedInstance.setKey(apikey);
 
     return new Promise((resolve, reject) => { 
@@ -67,6 +68,11 @@ scanFunction = async(body)=> {
           reject(err);
         }
         let uploadResponse_parsed = JSON.parse(uploadResponse)
+
+        //esperar para obtener info del analisis. Parametro configurable. 
+        //el servicio se toma su tiempo (~1 min a veces) para retornar resultados
+        console.log(uploadResponse_parsed["data"]["id"])
+        await new Promise(r => setTimeout(r, 120000));
 
         defaultTimedInstance.getAnalysisInfo(uploadResponse_parsed["data"]["id"], async(err, analysis_response)=>{
           if (err) {
@@ -83,6 +89,7 @@ scanFunction = async(body)=> {
               analysis_response_parsed.data.attributes.stats.harmless)<40
             ){
             console.log("archivo malicioso o analisis incompleto")
+            console.log(analysis_response_parsed.data.attributes.stats)
             resolve(false)
           }
           resolve(true)
