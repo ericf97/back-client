@@ -31,7 +31,7 @@ caseDao.getAll = async() => {
   const request = client.request();
 
   const result = await request.query(
-   `select C.*, S.nameState, U.name, U.lastName, U.phone, U.email, U.addressUser, D.amount, D.moneyType, D.methodType, D.dateDeposit, U.authId
+   `select C.*, S.nameState, S.percentage, U.name, U.lastName, U.phone, U.email, U.addressUser, D.amount, D.moneyType, D.methodType, D.dateDeposit, U.authId
     from cases C
     join states S on S.stateId = C.stateId
     join users U on C.userId = U.userId
