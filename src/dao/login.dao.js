@@ -19,7 +19,7 @@ loginDao.getByNick = async (nick) => {
 
   request.input('nick', NVarChar, nick);
 
-  const result = await request.query('select a.*, r.name as roleName from auth a join roles r on r.roleId = a.roleId where a.nick = @nick');
+  const result = await request.query('select a.*, r.name as roleName, u.userId from auth a join roles r on r.roleId = a.roleId join users u on u.authId = a.authId where a.nick = @nick');
 
   return result.recordset[0];
 }
