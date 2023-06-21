@@ -22,7 +22,14 @@ caseDao.getAllByUserId = async (userId) => {
   const request = client.request();
 
   request.input('user_id', Int, userId);
-  const result = await request.query('select * from cases where userId = @user_id');
+  const result = await request.query(
+    `select C.*, S.nameState, S.percentage, U.name, U.lastName, U.phone, U.email, U.addressUser, D.amount, D.moneyType, D.methodType, D.dateDeposit, U.authId
+     from cases C
+     join states S on S.stateId = C.stateId
+     join users U on C.userId = U.userId
+     join deposit D on D.caseId = C.caseId
+     where U.userId = @user_id`);
+
   return result.recordset;
 }
 
