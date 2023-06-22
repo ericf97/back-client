@@ -26,6 +26,7 @@ router
     body('amountLost').notEmpty(),
     body('stateId').notEmpty().isNumeric(),
     body('country').notEmpty(),
+    body('comments'),
     validateRequest],
     caseController.edit
   )

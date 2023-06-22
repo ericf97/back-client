@@ -55,7 +55,8 @@ caseService.edit = async (request) => {
     depositType,//paypal, cash, deposit bank, crypto
     stateId,
     country,
-    dateDeposit} = request;
+    dateDeposit,
+    comments} = request;
 
   const caseExists = await caseService.getById(caseId);
   // const userExists = await userService.getById(userId);
@@ -74,11 +75,12 @@ caseService.edit = async (request) => {
   !nameEnterprise ? nameEnterprise = caseExists.nameEnterprise : nameEnterprise;
   !stateId ? stateId = caseExists.stateId : stateId;
   !country ? country = caseExists.country : country;
+  !comments ? comments = caseExists.comments : comments;
 
   //deposit
   !amountLost ? amountLost = deposit.amount : amountLost;
 
-  await caseDao.edit(caseId, nameEnterprise, stateId, country);
+  await caseDao.edit(caseId, nameEnterprise, stateId, country, comments);
 
   await depositDao.edit(deposit.depositId, amountLost, deposit.moneyType, deposit.methodType, deposit.dateDeposit);
 
