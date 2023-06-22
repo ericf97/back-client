@@ -2,17 +2,17 @@ const dbClient = require('../utils/dbClient');
 const { NVarChar, Int, Decimal } = require('mssql');
 const caseDao = {};
 
-caseDao.save = async (userId, nameEnterprise, amountLost, stateId, country) => {
+caseDao.save = async (userId, nameEnterprise, country, comments, stateId) => {
   const client = await dbClient();
   const request = client.request();
 
   request.input('user_id', Int, userId);
   request.input('name_enterprise', NVarChar, nameEnterprise);
-  request.input('amount_lost', Decimal, amountLost);
   request.input('state_id', Int, stateId);
-  request.input('country', NVarChar, country)
+  request.input('country', NVarChar, country);
+  request.input('comments', NVarChar, comments);
 
-  const result = await request.query('insert into cases output inserted.caseId values(@name_enterprise, @amount_lost, @state_id, @user_id, @country)');
+  const result = await request.query('insert into cases output inserted.caseId values(@name_enterprise, @state_id, @user_id, @country, @comments)');
 
   return result.recordset[0];
 }

@@ -16,6 +16,7 @@ router
     body('depositType').notEmpty(),
     body('dateDeposit').notEmpty().isDate(),
     body('country').notEmpty(),
+    body('comments'),
     validateRequest],
     caseController.new
   )
