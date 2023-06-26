@@ -16,7 +16,7 @@ router
     body('depositType').notEmpty(),
     body('dateDeposit').notEmpty().isDate(),
     body('country').notEmpty(),
-    body('comments'),
+    body('description'),
     validateRequest],
     caseController.new
   )
@@ -26,7 +26,7 @@ router
     body('amountLost').notEmpty(),
     body('stateId').notEmpty().isNumeric(),
     body('country').notEmpty(),
-    body('comments'),
+    body('description'),
     validateRequest],
     caseController.edit
   )

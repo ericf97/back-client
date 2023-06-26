@@ -2,7 +2,7 @@ const dbClient = require('../utils/dbClient');
 const { NVarChar, Int, Decimal } = require('mssql');
 const caseDao = {};
 
-caseDao.save = async (userId, nameEnterprise, country, comments, stateId) => {
+caseDao.save = async (userId, nameEnterprise, country, description, stateId) => {
   const client = await dbClient();
   const request = client.request();
 
@@ -10,9 +10,9 @@ caseDao.save = async (userId, nameEnterprise, country, comments, stateId) => {
   request.input('name_enterprise', NVarChar, nameEnterprise);
   request.input('state_id', Int, stateId);
   request.input('country', NVarChar, country);
-  request.input('comments', NVarChar, comments);
+  request.input('description', NVarChar, description);
 
-  const result = await request.query('insert into cases output inserted.caseId values(@name_enterprise, @state_id, @user_id, @country, @comments)');
+  const result = await request.query('insert into cases output inserted.caseId values(@name_enterprise, @state_id, @user_id, @country, @description)');
 
   return result.recordset[0];
 }
@@ -65,7 +65,7 @@ caseDao.getById = async(caseId) => {
   return result.recordset[0];
 }
 
-caseDao.edit = async (caseId, nameEnterprise, stateId, country,  comments) => {
+caseDao.edit = async (caseId, nameEnterprise, stateId, country,  description) => {
   const client = await dbClient();
   const request = client.request();
   
@@ -73,13 +73,13 @@ caseDao.edit = async (caseId, nameEnterprise, stateId, country,  comments) => {
   request.input('name_enterprise', NVarChar, nameEnterprise);
   request.input('state_id', Int, stateId);
   request.input('country', NVarChar, country);
-  request.input('comments', NVarChar, comments);
+  request.input('description', NVarChar, description);
 
   return request.query(`update cases
   set nameEnterprise = @name_enterprise,
   stateId = @state_id,
   country = @country,
-  comments = @comments
+  description = @description
   where caseId = @case_id`);
 }
 
