@@ -14,8 +14,13 @@ azFileService.readDirectoryBase = async () => {
 }
 azFileService.readDirectory = async (caseId) => {
 
-  const directory = await axios.get(`${AZURE_STORAGE_URL}${caseId}?restype=directory&comp=list&${SAS_KEY}`);
-  return parseToJSON(directory.data);
+  try {
+    
+    const directory = await axios.get(`${AZURE_STORAGE_URL}${caseId}?restype=directory&comp=list&${SAS_KEY}`);
+    return parseToJSON(directory.data);
+  } catch (error) {
+    if(error.response.status === 404) return;
+  }
 }
 
 azFileService.createDirectory = (directoryName) => {
