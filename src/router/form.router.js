@@ -11,7 +11,7 @@ router
     body('phone'),
     body('addressUser'),
     body('nameEnterprise').notEmpty(),
-    body('amountLost').notEmpty(),
+    body('amount').notEmpty(),
     body('moneyType').notEmpty(),
     body('depositType').notEmpty(),
     body('dateDeposit').notEmpty().isDate(),
@@ -23,7 +23,7 @@ router
   .patch('/', [
     body('caseId').notEmpty(),
     body('nameEnterprise').notEmpty(),
-    body('amountLost').notEmpty(),
+    body('amount').notEmpty(),
     body('stateId').notEmpty().isNumeric(),
     body('country').notEmpty(),
     body('description'),
