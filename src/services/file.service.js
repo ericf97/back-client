@@ -45,6 +45,7 @@ fileService.save = async(body) => {
 fileService.get = async(caseId) => {
 
   const files =  await azFileService.readDirectory(caseId);
+  if(!files) return [];
   return files.EnumerationResults.Entries[0].File.map(a => {
 
     return {
