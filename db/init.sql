@@ -42,7 +42,6 @@ drop table if exists cases;
 create table cases(
     caseId bigint identity(1, 1) not null,
     nameEnterprise nvarchar(255) not null,
-    amountLost nvarchar(255) not null,
     stateId bigint not null,
     userId bigint not null,
     country nvarchar(50),
