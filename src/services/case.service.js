@@ -14,7 +14,7 @@ caseService.save = async (request) => {
     phone,
     addressUser,
     nameEnterprise,
-    amountLost,
+    amount,
     moneyType,
     depositType,//paypal, cash, deposit bank, crypto
     dateDeposit,
@@ -33,7 +33,8 @@ caseService.save = async (request) => {
   }
 
   const caseSaved = await caseDao.save(userId, nameEnterprise, country, description, 1); //1 means stateId initial
-  await depositDao.save(caseSaved.caseId, +amountLost, moneyType, depositType, dateDeposit);
+  await depositDao.save(caseSaved.caseId, +amount, moneyType, depositType, dateDeposit);
+  console.log('case successfully saved');
 }
 
 caseService.getAll = async() => {
