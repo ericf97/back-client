@@ -44,10 +44,10 @@ caseService.getAll = async() => {
 caseService.edit = async (request) => {
   let {
     caseId,
-    // userId,
-    // name,
-    // lastName,
-    // email,
+    userId,
+    name,
+    lastName,
+    email,
     // phone,
     // addressUser,
     nameEnterprise,
@@ -60,7 +60,6 @@ caseService.edit = async (request) => {
     description} = request;
 
   const caseExists = await caseService.getById(caseId);
-  // const userExists = await userService.getById(userId);
 
   if(!caseExists) {
     throw new Error('case does not exists');
@@ -72,6 +71,10 @@ caseService.edit = async (request) => {
     throw new Error('deposit does not exists');
   }
 
+  const userExists = await userService.getById(userId);
+
+  if(!userExists) throw new Error('user does not exists');
+
   //cases
   !nameEnterprise ? nameEnterprise = caseExists.nameEnterprise : nameEnterprise;
   !stateId ? stateId = caseExists.stateId : stateId;
@@ -81,10 +84,16 @@ caseService.edit = async (request) => {
   //deposit
   !amountLost ? amountLost = deposit.amount : amountLost;
 
+  //user
+  name ? userExists.name = name : false;
+  lastName ? userExists.lastName = lastName : false;
+  email ? userExists.email = email : false;
+
   await caseDao.edit(caseId, nameEnterprise, stateId, country, description);
 
   await depositDao.edit(deposit.depositId, amountLost, deposit.moneyType, deposit.methodType, deposit.dateDeposit);
 
+  await userService.save(userExists);
 }
 
 caseService.getByUserId = async(userId) => {

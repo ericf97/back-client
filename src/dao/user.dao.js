@@ -9,7 +9,7 @@ userDao.create = async (name, lastName, email, phone, address) => {
   request.input('last_name', NVarChar, lastName);
   request.input('email', NVarChar, email);
   request.input('phone', NVarChar, phone);
-  request.input('address', NVarChar, address)
+  request.input('address', NVarChar, address);
 
   const result = await request.query('insert into users(name, lastName, email, phone, addressUser) output inserted.userId values(@name, @last_name, @email, @phone, @address)');
 
@@ -20,7 +20,7 @@ userDao.getAll = async() => {
   const client = await dbClient();
   const request = client.request();
 
-  const result = await request.query('select * from users')
+  const result = await request.query('select * from users');
   return result.recordset;
 }
 
@@ -28,18 +28,18 @@ userDao.getById = async(userId) => {
   const client = await dbClient();
   const request = client.request();
 
-  request.input('user_id', Int, userId);
+  request.input('user_id', Int, +userId);
 
   const result = await request.query('select top(1) * from users where userId = @user_id')
 
   return result.recordset[0];
 }
 
-userDao.save = async(userId, name, lastName, email, phone, addressUser) => {
+userDao.save = async({userId, name, lastName, email, phone, addressUser}) => {
   const client = await dbClient();
   const request = client.request();
 
-  request.input('user_id', Int, userId);
+  request.input('user_id', Int, +userId);
   request.input('name', NVarChar, name);
   request.input('last_name', NVarChar, lastName);
   request.input('email', NVarChar, email);
