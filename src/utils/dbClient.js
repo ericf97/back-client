@@ -21,8 +21,7 @@ let connection = null;
 
 const connect = async () => {
   if(connection) return connection;
-  console.log('connecting');
-  console.log(process.env.CONNECTION_STRING);
+
   return connection = await sql.connect(process.env.CONNECTION_STRING);
 }
 

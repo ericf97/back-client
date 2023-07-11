@@ -22,6 +22,8 @@ router
   )
   .patch('/', [
     body('caseId').notEmpty(),
+    body('name').notEmpty(),
+    body('lastName').notEmpty(),
     body('nameEnterprise').notEmpty(),
     body('amount').notEmpty(),
     body('stateId').notEmpty().isNumeric(),
