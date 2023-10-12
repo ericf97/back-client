@@ -1,5 +1,5 @@
 const dbClient = require('../utils/dbClient');
-const { NVarChar, Int, Decimal } = require('mssql');
+const { NVarChar, Int, Decimal, DateTime } = require('mssql');
 const caseDao = {};
 
 caseDao.save = async (userId, nameEnterprise, country, description, stateId) => {
@@ -11,8 +11,9 @@ caseDao.save = async (userId, nameEnterprise, country, description, stateId) => 
   request.input('state_id', Int, stateId);
   request.input('country', NVarChar, country);
   request.input('description', NVarChar, description);
+  request.input('date_saved', DateTime, new Date());
 
-  const result = await request.query('insert into cases output inserted.caseId values(@name_enterprise, @state_id, @user_id, @country, @description)');
+  const result = await request.query('insert into cases output inserted.caseId values(@name_enterprise, @state_id, @user_id, @country, @description, @date_saved)');
 
   return result.recordset[0];
 }

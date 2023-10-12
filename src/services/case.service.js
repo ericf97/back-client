@@ -32,6 +32,11 @@ caseService.save = async (request) => {
     userId = userSaved.userId;
   }
 
+  //logic to depure country
+  if(country.contains('+')) {
+    country = country.split('+')[0];
+  }
+
   const caseSaved = await caseDao.save(userId, nameEnterprise, country, description, 1); //1 means stateId initial
   await depositDao.save(caseSaved.caseId, +amount, moneyType, depositType, dateDeposit);
   console.log('case successfully saved');
