@@ -46,13 +46,15 @@ fileService.get = async(caseId) => {
 
   const files =  await azFileService.readDirectory(caseId);
   if(!files) return [];
+  const {AZURE_STORAGE_URL, SAS_KEY} = process.env;
   return files.EnumerationResults.Entries[0].File.map(a => {
 
     return {
       caseId: caseId,
       fileName: a.Name[0],
       url: `url/${a.Name}`,
-      ext: a.Name[0].split('.')[1]
+      ext: a.Name[0].split('.')[1],
+      download: `${AZURE_STORAGE_URL}${caseId}/${a.Name[0]}?${SAS_KEY}`
     }
   });
 }
