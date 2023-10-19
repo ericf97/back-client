@@ -33,7 +33,7 @@ caseService.save = async (request) => {
   }
 
   //logic to depure country
-  if(country.contains('+')) {
+  if(country.indexOf('+') > -1) {
     country = country.split('+')[0];
   }
 
